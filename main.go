@@ -1,4 +1,4 @@
-// main prints the 4 least used words in the url comments body from this
+// package main prints the 4 least used words in the url comments body from this
 // "https://jsonplaceholder.typicode.com/comments"
 package main
 
@@ -12,8 +12,8 @@ import (
 	"strings"
 )
 
-// wordcount contains the word and its count
-type wordCount struct {
+//WordCount contains the word and its count
+type WordCount struct {
 	word  string
 	count int
 }
@@ -28,10 +28,10 @@ type Comment struct {
 }
 
 func main() {
-	comments := getComments("https://jsonplaceholder.typicode.com/comments")
-	words := processComments(comments)
+	comments := GetComments("https://jsonplaceholder.typicode.com/comments")
+	words := ProcessComments(comments)
 
-	sortedWordCounts := sortWords(words)
+	sortedWordCounts := SortWords(words)
 	fmt.Println("four least Used words and count")
 	for i := 0; i < 4; i++ {
 		w := sortedWordCounts[i]
@@ -39,8 +39,8 @@ func main() {
 	}
 }
 
-// getComments gets the comment from the url and returns the comments
-func getComments(url string) []Comment {
+// GetComments gets the comment from the url and returns the comments
+func GetComments(url string) []Comment {
 	comments := []Comment{}
 	resp, err := http.Get(url)
 	if err != nil {
@@ -59,8 +59,8 @@ func getComments(url string) []Comment {
 	return comments
 }
 
-// processComments processes the comments and returns the a map of words and their count
-func processComments(comments []Comment) map[string]int {
+// ProcessComments processes the comments and returns the a map of words and their count
+func ProcessComments(comments []Comment) map[string]int {
 	words := map[string]int{}
 	for _, comment := range comments {
 		for _, word := range strings.Fields(comment.Body) {
@@ -76,14 +76,14 @@ func processComments(comments []Comment) map[string]int {
 	return words
 }
 
-// sortWords sorts the word in desending order and returns a slice of wordCount
-func sortWords(words map[string]int) []wordCount {
+// SortWords sorts the word in desending order and returns a slice of wordCount
+func SortWords(words map[string]int) []WordCount {
 	l := len(words)
-	wordCounts := make([]wordCount, l, l)
+	wordCounts := make([]WordCount, l, l)
 	{
 		i := 0
 		for k, v := range words {
-			wordCounts[i] = wordCount{k, v}
+			wordCounts[i] = WordCount{k, v}
 			i++
 		}
 	}

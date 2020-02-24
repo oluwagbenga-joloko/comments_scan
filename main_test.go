@@ -19,7 +19,7 @@ func TestGetComments(t *testing.T) {
 	}))
 	defer server.Close()
 
-	actualComments := getComments(server.URL)
+	actualComments := GetComments(server.URL)
 
 	if l := len(actualComments); l != 3 {
 		t.Errorf("wrong number of comments: got %v want %v",
@@ -52,7 +52,7 @@ func TestProcessComments(t *testing.T) {
 		"boy":   8,
 		"swims": 1,
 	}
-	actualWords := processComments(comments)
+	actualWords := ProcessComments(comments)
 	if lActual, lExpected := len(actualWords), len(expectedWords); lActual != lExpected {
 		t.Errorf("wrong number of comments: got %v want %v",
 			lActual, lExpected)
@@ -77,17 +77,17 @@ func TestSortWords(t *testing.T) {
 		"swims": 90,
 		"one":   1,
 	}
-	expected := []wordCount{
-		wordCount{"one", 1},
-		wordCount{"Hello", 2},
-		wordCount{"from", 3},
-		wordCount{"river", 5},
-		wordCount{"the", 6},
-		wordCount{"boy", 8},
-		wordCount{"swims", 90},
-		wordCount{"max", 999},
+	expected := []WordCount{
+		WordCount{"one", 1},
+		WordCount{"Hello", 2},
+		WordCount{"from", 3},
+		WordCount{"river", 5},
+		WordCount{"the", 6},
+		WordCount{"boy", 8},
+		WordCount{"swims", 90},
+		WordCount{"max", 999},
 	}
-	actual := sortWords(words)
+	actual := SortWords(words)
 	if lActual, lExpected := len(actual), len(expected); lActual != lExpected {
 		t.Errorf("wrong number of comments: got %v want %v",
 			lActual, lExpected)
@@ -96,11 +96,11 @@ func TestSortWords(t *testing.T) {
 	for i, expectedWordCount := range expected {
 		actualWordCount := actual[i]
 		if actualWordCount.count != expectedWordCount.count {
-			t.Errorf("wrong wordCount count: got %v want %v",
+			t.Errorf("wrong WordCount count: got %v want %v",
 				actualWordCount.count, expectedWordCount.count)
 		}
 		if actualWordCount.word != expectedWordCount.word {
-			t.Errorf("wrong wordCount word: got %v want %v",
+			t.Errorf("wrong WordCount word: got %v want %v",
 				actualWordCount.word, expectedWordCount.word)
 		}
 	}
