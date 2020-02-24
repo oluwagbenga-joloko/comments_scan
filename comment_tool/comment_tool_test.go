@@ -1,4 +1,4 @@
-package main
+package commenttool
 
 import (
 	"encoding/json"
@@ -95,13 +95,13 @@ func TestSortWords(t *testing.T) {
 
 	for i, expectedWordCount := range expected {
 		actualWordCount := actual[i]
-		if actualWordCount.count != expectedWordCount.count {
+		if actualWordCount.Count != expectedWordCount.Count {
 			t.Errorf("wrong WordCount count: got %v want %v",
-				actualWordCount.count, expectedWordCount.count)
+				actualWordCount.Count, expectedWordCount.Count)
 		}
-		if actualWordCount.word != expectedWordCount.word {
+		if actualWordCount.Word != expectedWordCount.Word {
 			t.Errorf("wrong WordCount word: got %v want %v",
-				actualWordCount.word, expectedWordCount.word)
+				actualWordCount.Word, expectedWordCount.Word)
 		}
 	}
 }

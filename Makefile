@@ -4,7 +4,7 @@ GO=$(shell which go)
 EXENAME=main
 
 test:
-	@$(GO) test -v -cover
+	@$(GO) test -v ./... -cover
 
 build: 
 	@$(GO) build -o $(EXENAME)
